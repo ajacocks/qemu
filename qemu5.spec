@@ -110,8 +110,9 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 %make_install
 install -m 0755 -d %{_buildrootdir}/opt/qemu-%{version}/share/doc/qemu
-install -m 0644 %{_builddir}/qemu-%{version}/LICENSE %{_buildrootdir}/opt/qemu-%{version}/share/doc/qemu/LICENSE
-install -m 0644 %{_builddir}/qemu-%{version}/MAINTAINERS %{_buildrootdir}/opt/qemu-%{version}/share/doc/qemu/MAINTAINERS
+install -m 0644 %{_builddir}/qemu-%{version}/LICENSE %{buildroot}/opt/qemu-%{version}/share/doc/qemu/LICENSE
+install -m 0644 %{_builddir}/qemu-%{version}/MAINTAINERS %{buildroot}/opt/qemu-%{version}/share/doc/qemu/MAINTAINERS
+
 #mv %{_buildrootdir}/qemu-%{version}-%{release}.%{_arch} %{_buildrootdir}/qemu52-%{version}-%{release}.%{_arch}
 
 %files
@@ -574,15 +575,15 @@ install -m 0644 %{_builddir}/qemu-%{version}/MAINTAINERS %{_buildrootdir}/opt/qe
 %doc %{_docdir}/qemu/index.html
 %license %{_docdir}/qemu/LICENSE
 %doc %{_docdir}/qemu/MAINTAINERS
-%doc %{_mandir}/man8/qemu-ga.8.gz
-%doc %{_mandir}/man8/qemu-nbd.8.gz
-%doc %{_mandir}/man8/qemu-pr-helper.8.gz
-%doc %{_mandir}/man7/qemu-ga-ref.7.gz
-%doc %{_mandir}/man7/qemu-qmp-ref.7.gz
-%doc %{_mandir}/man7/qemu-block-drivers.7.gz
-%doc %{_mandir}/man7/qemu-cpu-models.7.gz
-%doc %{_mandir}/man1/qemu-img.1.gz
-%doc %{_mandir}/man1/qemu.1.gz
+%doc %{_mandir}/man8/qemu-ga.8
+%doc %{_mandir}/man8/qemu-nbd.8
+%doc %{_mandir}/man8/qemu-pr-helper.8
+%doc %{_mandir}/man7/qemu-ga-ref.7
+%doc %{_mandir}/man7/qemu-qmp-ref.7
+%doc %{_mandir}/man7/qemu-block-drivers.7
+%doc %{_mandir}/man7/qemu-cpu-models.7
+%doc %{_mandir}/man1/qemu-img.1
+%doc %{_mandir}/man1/qemu.1
 %{_libexecdir}/qemu-bridge-helper
 %{_libexecdir}/vhost-user-gpu
 
