@@ -7,6 +7,8 @@ License:        GPLv2+ and LGPLv2+ and BSD
 URL:            http://www.qemu.org/
 Source0:        https://download.qemu.org/qemu-%{version}.tar.xz
 
+%define	_prefix	/opt/qemu-%{version}
+
 # Group 'Development Tools'
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -107,8 +109,13 @@ make %{?_smp_mflags}
 %install
 rm -rf $RPM_BUILD_ROOT
 %make_install
+install -m 0755 -d %{_buildrootdir}/opt/qemu-%{version}/share/doc/qemu
+install -m 0644 %{_builddir}/qemu-%{version}/LICENSE %{_buildrootdir}/opt/qemu-%{version}/share/doc/qemu/LICENSE
+install -m 0644 %{_builddir}/qemu-%{version}/MAINTAINERS %{_buildrootdir}/opt/qemu-%{version}/share/doc/qemu/MAINTAINERS
+#mv %{_buildrootdir}/qemu-%{version}-%{release}.%{_arch} %{_buildrootdir}/qemu52-%{version}-%{release}.%{_arch}
 
 %files
+%defattr(-,root,root,-)
 %{_bindir}/elf2dmp
 %{_bindir}/qemu-aarch64
 %{_bindir}/qemu-aarch64_be
@@ -565,6 +572,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_docdir}/qemu/user/searchindex.js
 %doc %{_docdir}/qemu/user/objects.inv
 %doc %{_docdir}/qemu/index.html
+%license %{_docdir}/qemu/LICENSE
+%doc %{_docdir}/qemu/MAINTAINERS
 %doc %{_mandir}/man8/qemu-ga.8.gz
 %doc %{_mandir}/man8/qemu-nbd.8.gz
 %doc %{_mandir}/man8/qemu-pr-helper.8.gz
