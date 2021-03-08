@@ -1,6 +1,8 @@
 %global debug_package %{nil}
-Name:           qemu52
-Version:        5.2.0
+%global latest_release %(curl 'https://download.qemu.org/' 2>/dev/null | sed -e 's|<[^>]*>||g' -e 's/\.xz.*/.xz/' | egrep '^qemu-.*xz' | egrep -v 'rc[0-9]+' | sort -V | tail -1 | sed -e 's/^qemu-//' -e 's/\.tar.xz$//')
+
+Name:           qemu-full
+Version:        %{latest_release}
 Release:        1%{?dist}
 Summary:        QEMU is a FAST! processor emulator
 License:        GPLv2+ and LGPLv2+ and BSD
@@ -53,7 +55,12 @@ BuildRequires:  libfdt-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  libdrm-devel
 BuildRequires:  libepoxy-devel
+BuildRequires:  libiscsi-devel
+BuildRequires:  libjpeg-turbo-devel
+BuildRequires:  libnfs-devel
 BuildRequires:  libslirp-devel
+BuildRequires:  libxml2-devel
+BuildRequires:  lzo-devel
 BuildRequires:  mesa-libgbm-devel
 BuildRequires:  ncurses-devel
 BuildRequires:  ninja-build
@@ -61,6 +68,9 @@ BuildRequires:  pixman-devel
 BuildRequires:  pulseaudio-libs-devel
 BuildRequires:  python3-sphinx
 BuildRequires:  SDL2-devel
+BuildRequires:  snappy-devel
+BuildRequires:  spice-server-devel
+BuildRequires:  systemd-devel
 BuildRequires:  virglrenderer-devel
 BuildRequires:  vte291-devel
 BuildRequires:  zlib-devel
@@ -101,7 +111,7 @@ As QEMU requires no host kernel patches to run, it is safe and easy to use.
 %setup -n qemu-%{version}
 
 %build
-./configure --prefix=/opt/qemu-%{version} \
+./configure --prefix=/opt/qemu-%{version} --enable-plugins
 #./configure --prefix=%{buildroot}/usr
 #./configure --prefix=/usr
 make %{?_smp_mflags}
