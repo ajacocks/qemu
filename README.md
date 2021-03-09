@@ -19,18 +19,18 @@ cd
 rpmdev-setuptree
 
 git clone https://github.com/ajacocks/qemu.git
-cp qemu/qemu5.spec rpmbuild/SPECS/
+cp qemu/qemu-full.spec rpmbuild/SPECS/
 
 cd ~/rpmbuild/SPECS/
-spectool -g -R qemu5.spec
+spectool -g -R qemu-full.spec
 
-sudo yum-builddep qemu5.spec
-rpmbuild -bb qemu5.spec
+sudo dnf builddep qemu-full.spec
+rpmbuild -bb qemu-full.spec
 ```
 
 The built RPM is located here:
 
 ````
-~/rpmbuild/RPMS/x86_64/qemu52-5.2.0-1.el8.x86_64.rpm
+~/rpmbuild/RPMS/x86_64/qemu-full-5.2.0-1.el8.x86_64.rpm
 ````
 

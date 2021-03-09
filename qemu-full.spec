@@ -594,6 +594,7 @@ install -m 0644 %{_builddir}/qemu-%{version}/MAINTAINERS %{buildroot}/opt/qemu-%
 %doc %{_mandir}/man7/qemu-cpu-models.7
 %doc %{_mandir}/man1/qemu-img.1
 %doc %{_mandir}/man1/qemu.1
+%{_includedir}/qemu-plugin.h
 %{_libexecdir}/qemu-bridge-helper
 %{_libexecdir}/vhost-user-gpu
 
